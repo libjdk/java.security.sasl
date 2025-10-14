@@ -246,7 +246,7 @@ $SaslClient* Sasl::createSaslClient($StringArray* mechanisms, $String* authoriza
 	for (int32_t i = 0; i < $nc(mechanisms)->length; ++i) {
 		if (($assign(mechName, mechanisms->get(i))) == nullptr) {
 			$throwNew($NullPointerException, "Mechanism name cannot be null"_s);
-		} else if (mechName->length() == 0) {
+		} else if ($nc(mechName)->length() == 0) {
 			continue;
 		} else if (isDisabled(mechName)) {
 			$init($Level);
@@ -303,7 +303,7 @@ $SaslServer* Sasl::createSaslServer($String* mechanism, $String* protocol, $Stri
 	$var($Provider$Service, service, nullptr);
 	if (mechanism == nullptr) {
 		$throwNew($NullPointerException, "Mechanism name cannot be null"_s);
-	} else if (mechanism->length() == 0) {
+	} else if ($nc(mechanism)->length() == 0) {
 		return nullptr;
 	} else if (isDisabled(mechanism)) {
 		$init($Level);
