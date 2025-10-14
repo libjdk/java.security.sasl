@@ -1,0 +1,12 @@
+com.sun.security.sasl.util.AbstractSaslImpl
+com.sun.security.sasl.util.PolicyUtils
+javax.security.sasl.AuthenticationException
+javax.security.sasl.AuthorizeCallback
+javax.security.sasl.RealmCallback
+javax.security.sasl.RealmChoiceCallback
+javax.security.sasl.Sasl
+javax.security.sasl.SaslClient
+javax.security.sasl.SaslClientFactory
+javax.security.sasl.SaslException
+javax.security.sasl.SaslServer
+javax.security.sasl.SaslServerFactory
