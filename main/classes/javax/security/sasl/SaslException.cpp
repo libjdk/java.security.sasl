@@ -77,6 +77,7 @@ $Throwable* SaslException::initCause($Throwable* cause) {
 }
 
 $String* SaslException::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($String, answer, $IOException::toString());
 	if (this->_exception != nullptr && !$equals(this->_exception, this)) {
 		$plusAssign(answer, $$str({" [Caused by "_s, $($nc(this->_exception)->toString()), "]"_s}));

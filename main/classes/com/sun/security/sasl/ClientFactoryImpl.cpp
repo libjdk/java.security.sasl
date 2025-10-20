@@ -100,6 +100,7 @@ void ClientFactoryImpl::init$() {
 }
 
 $SaslClient* ClientFactoryImpl::createSaslClient($StringArray* mechs, $String* authorizationId, $String* protocol, $String* serverName, $Map* props, $CallbackHandler* cbh) {
+	$useLocalCurrentObjectStackCache();
 	for (int32_t i = 0; i < $nc(mechs)->length; ++i) {
 		bool var$0 = $nc(mechs->get(i))->equals($nc(ClientFactoryImpl::myMechs)->get(ClientFactoryImpl::EXTERNAL));
 		if (var$0 && $PolicyUtils::checkPolicy($nc(ClientFactoryImpl::mechPolicies)->get(ClientFactoryImpl::EXTERNAL), props)) {
@@ -126,6 +127,7 @@ $StringArray* ClientFactoryImpl::getMechanismNames($Map* props) {
 }
 
 $ObjectArray* ClientFactoryImpl::getUserInfo($String* prefix, $String* authorizationId, $CallbackHandler* cbh) {
+	$useLocalCurrentObjectStackCache();
 	if (cbh == nullptr) {
 		$throwNew($SaslException, "Callback handler to get username/password required"_s);
 	}

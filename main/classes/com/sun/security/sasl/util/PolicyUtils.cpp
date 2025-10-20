@@ -71,6 +71,7 @@ void PolicyUtils::init$() {
 }
 
 bool PolicyUtils::checkPolicy(int32_t flags, $Map* props) {
+	$useLocalCurrentObjectStackCache();
 	if (props == nullptr) {
 		return true;
 	}
@@ -97,6 +98,7 @@ bool PolicyUtils::checkPolicy(int32_t flags, $Map* props) {
 }
 
 $StringArray* PolicyUtils::filterMechs($StringArray* mechs, $ints* policies, $Map* props) {
+	$useLocalCurrentObjectStackCache();
 	if (props == nullptr) {
 		return $cast($StringArray, $nc(mechs)->clone());
 	}

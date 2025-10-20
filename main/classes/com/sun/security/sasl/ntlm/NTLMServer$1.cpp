@@ -95,6 +95,7 @@ void NTLMServer$1::init$($NTLMServer* this$0, $String* arg0, $String* arg1, $Cal
 }
 
 $chars* NTLMServer$1::getPassword($String* ntdomain, $String* username) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($RealmCallback, rcb, (ntdomain == nullptr || $nc(ntdomain)->isEmpty()) ? $new($RealmCallback, "Domain: "_s) : $new($RealmCallback, "Domain: "_s, ntdomain));
 		$var($NameCallback, ncb, $new($NameCallback, "Name: "_s, username));

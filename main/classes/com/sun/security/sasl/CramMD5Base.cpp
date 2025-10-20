@@ -143,6 +143,7 @@ void CramMD5Base::finalize() {
 
 $String* CramMD5Base::HMAC_MD5($bytes* key$renamed, $bytes* text) {
 	$init(CramMD5Base);
+	$useLocalCurrentObjectStackCache();
 	$var($bytes, key, key$renamed);
 	$var($MessageDigest, md5, $MessageDigest::getInstance("MD5"_s));
 	if ($nc(key)->length > CramMD5Base::MD5_BLOCKSIZE) {

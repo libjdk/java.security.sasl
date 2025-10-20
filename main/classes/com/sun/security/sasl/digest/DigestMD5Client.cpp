@@ -247,6 +247,7 @@ bool DigestMD5Client::hasInitialResponse() {
 }
 
 $bytes* DigestMD5Client::evaluateChallenge($bytes* challengeData) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(challengeData)->length > $DigestMD5Base::MAX_CHALLENGE_LENGTH) {
 		$throwNew($SaslException, $$str({"DIGEST-MD5: Invalid digest-challenge length. Got:  "_s, $$str(challengeData->length), " Expected < "_s, $$str($DigestMD5Base::MAX_CHALLENGE_LENGTH)}));
 	}
@@ -317,6 +318,7 @@ $bytes* DigestMD5Client::evaluateChallenge($bytes* challengeData) {
 }
 
 void DigestMD5Client::processChallenge($byteArray2* challengeVal, $List* realmChoices) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(challengeVal)->get(DigestMD5Client::CHARSET) != nullptr) {
 		if (!"utf-8"_s->equals($$new($String, challengeVal->get(DigestMD5Client::CHARSET), this->encoding))) {
 			$throwNew($SaslException, $$str({"DIGEST-MD5: digest-challenge format violation. Unrecognised charset value: "_s, $$new($String, challengeVal->get(DigestMD5Client::CHARSET))}));
@@ -395,6 +397,7 @@ void DigestMD5Client::processChallenge($byteArray2* challengeVal, $List* realmCh
 }
 
 void DigestMD5Client::checkQopSupport($bytes* qopInChallenge, $bytes* ciphersInChallenge) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, qopOptions, nullptr);
 	if (qopInChallenge == nullptr) {
 		$assign(qopOptions, "auth"_s);
@@ -438,6 +441,7 @@ void DigestMD5Client::checkQopSupport($bytes* qopInChallenge, $bytes* ciphersInC
 }
 
 void DigestMD5Client::checkStrengthSupport($bytes* ciphersInChallenge) {
+	$useLocalCurrentObjectStackCache();
 	if (ciphersInChallenge == nullptr) {
 		$throwNew($SaslException, "DIGEST-MD5: server did not specify cipher to use for \'auth-conf\'"_s);
 	}
@@ -516,6 +520,7 @@ $String* DigestMD5Client::findCipherAndStrength($bytes* supportedCiphers, $Strin
 }
 
 $bytes* DigestMD5Client::generateClientResponse($bytes* charset) {
+	$useLocalCurrentObjectStackCache();
 	$var($ByteArrayOutputStream, digestResp, $new($ByteArrayOutputStream));
 	if (this->useUTF8) {
 		digestResp->write($("charset="_s->getBytes(this->encoding)));
@@ -564,6 +569,7 @@ $bytes* DigestMD5Client::generateClientResponse($bytes* charset) {
 }
 
 void DigestMD5Client::validateResponseValue($bytes* fromServer) {
+	$useLocalCurrentObjectStackCache();
 	if (fromServer == nullptr) {
 		$throwNew($SaslException, "DIGEST-MD5: Authenication failed. Expecting \'rspauth\' authentication success message"_s);
 	}

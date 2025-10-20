@@ -112,6 +112,7 @@ $String* NTLMClient::NTLM_DOMAIN = nullptr;
 $String* NTLMClient::NTLM_HOSTNAME = nullptr;
 
 void NTLMClient::init$($String* mech, $String* authzid, $String* protocol, $String* serverName, $Map* props, $CallbackHandler* cbh) {
+	$useLocalCurrentObjectStackCache();
 	this->step = 0;
 	$set(this, mech, mech);
 	$var($String, version, nullptr);
@@ -238,6 +239,7 @@ bool NTLMClient::hasInitialResponse() {
 }
 
 $bytes* NTLMClient::evaluateChallenge($bytes* challenge) {
+	$useLocalCurrentObjectStackCache();
 	++this->step;
 	if (this->step == 1) {
 		return $nc(this->client)->type1();

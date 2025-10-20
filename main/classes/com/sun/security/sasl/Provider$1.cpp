@@ -80,6 +80,7 @@ void Provider$1::init$($Provider* this$0, $Provider* val$p) {
 }
 
 $Object* Provider$1::run() {
+	$useLocalCurrentObjectStackCache();
 	$Provider::access$000(this->this$0, $$new($Provider$ProviderService, this->val$p, "SaslClientFactory"_s, "DIGEST-MD5"_s, "com.sun.security.sasl.digest.FactoryImpl"_s));
 	$Provider::access$100(this->this$0, $$new($Provider$ProviderService, this->val$p, "SaslClientFactory"_s, "NTLM"_s, "com.sun.security.sasl.ntlm.FactoryImpl"_s));
 	$Provider::access$200(this->this$0, $$new($Provider$ProviderService, this->val$p, "SaslClientFactory"_s, "EXTERNAL"_s, "com.sun.security.sasl.ClientFactoryImpl"_s));

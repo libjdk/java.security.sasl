@@ -239,6 +239,7 @@ void Sasl::init$() {
 
 $SaslClient* Sasl::createSaslClient($StringArray* mechanisms, $String* authorizationId, $String* protocol, $String* serverName, $Map* props, $CallbackHandler* cbh) {
 	$init(Sasl);
+	$useLocalCurrentObjectStackCache();
 	$var($SaslClient, mech, nullptr);
 	$var($SaslClientFactory, fac, nullptr);
 	$var($Provider$Service, service, nullptr);
@@ -284,6 +285,7 @@ $SaslClient* Sasl::createSaslClient($StringArray* mechanisms, $String* authoriza
 
 $Object* Sasl::loadFactory($Provider$Service* service) {
 	$init(Sasl);
+	$useLocalCurrentObjectStackCache();
 	try {
 		return $of($nc(service)->newInstance(nullptr));
 	} catch ($InvalidParameterException&) {
@@ -298,6 +300,7 @@ $Object* Sasl::loadFactory($Provider$Service* service) {
 
 $SaslServer* Sasl::createSaslServer($String* mechanism, $String* protocol, $String* serverName, $Map* props, $CallbackHandler* cbh) {
 	$init(Sasl);
+	$useLocalCurrentObjectStackCache();
 	$var($SaslServer, mech, nullptr);
 	$var($SaslServerFactory, fac, nullptr);
 	$var($Provider$Service, service, nullptr);
@@ -340,6 +343,7 @@ $SaslServer* Sasl::createSaslServer($String* mechanism, $String* protocol, $Stri
 
 $Enumeration* Sasl::getSaslClientFactories() {
 	$init(Sasl);
+	$useLocalCurrentObjectStackCache();
 	$var($Set, facs, getFactories("SaslClientFactory"_s));
 	$var($Iterator, iter, $nc(facs)->iterator());
 	return $new($Sasl$1, iter);
@@ -347,6 +351,7 @@ $Enumeration* Sasl::getSaslClientFactories() {
 
 $Enumeration* Sasl::getSaslServerFactories() {
 	$init(Sasl);
+	$useLocalCurrentObjectStackCache();
 	$var($Set, facs, getFactories("SaslServerFactory"_s));
 	$var($Iterator, iter, $nc(facs)->iterator());
 	return $new($Sasl$2, iter);
@@ -354,6 +359,7 @@ $Enumeration* Sasl::getSaslServerFactories() {
 
 $Set* Sasl::getFactories($String* serviceName) {
 	$init(Sasl);
+	$useLocalCurrentObjectStackCache();
 	$var($HashSet, result, $new($HashSet));
 	bool var$0 = (serviceName == nullptr) || ($nc(serviceName)->length() == 0);
 	if (var$0 || ($nc(serviceName)->endsWith("."_s))) {
@@ -399,6 +405,7 @@ $String* Sasl::lambda$static$0() {
 }
 
 void clinit$Sasl($Class* class$) {
+	$useLocalCurrentObjectStackCache();
 	$assignStatic(Sasl::SASL_LOGGER_NAME, "javax.security.sasl"_s);
 	$assignStatic(Sasl::QOP, "javax.security.sasl.qop"_s);
 	$assignStatic(Sasl::STRENGTH, "javax.security.sasl.strength"_s);

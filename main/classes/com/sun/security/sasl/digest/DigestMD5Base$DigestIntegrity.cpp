@@ -120,6 +120,7 @@ $String* DigestMD5Base$DigestIntegrity::CLIENT_INT_MAGIC = nullptr;
 $String* DigestMD5Base$DigestIntegrity::SVR_INT_MAGIC = nullptr;
 
 void DigestMD5Base$DigestIntegrity::init$($DigestMD5Base* this$0, bool clientMode) {
+	$useLocalCurrentObjectStackCache();
 	$set(this, this$0, this$0);
 	this->mySeqNum = 0;
 	this->peerSeqNum = 0;
@@ -138,6 +139,7 @@ void DigestMD5Base$DigestIntegrity::init$($DigestMD5Base* this$0, bool clientMod
 }
 
 void DigestMD5Base$DigestIntegrity::generateIntegrityKeyPair(bool clientMode) {
+	$useLocalCurrentObjectStackCache();
 	$var($bytes, cimagic, $nc(DigestMD5Base$DigestIntegrity::CLIENT_INT_MAGIC)->getBytes(this->this$0->encoding));
 	$var($bytes, simagic, $nc(DigestMD5Base$DigestIntegrity::SVR_INT_MAGIC)->getBytes(this->this$0->encoding));
 	$var($MessageDigest, md5, $MessageDigest::getInstance("MD5"_s));
@@ -165,6 +167,7 @@ void DigestMD5Base$DigestIntegrity::generateIntegrityKeyPair(bool clientMode) {
 }
 
 $bytes* DigestMD5Base$DigestIntegrity::wrap($bytes* outgoing, int32_t start, int32_t len) {
+	$useLocalCurrentObjectStackCache();
 	if (len == 0) {
 		$init($DigestMD5Base);
 		return $DigestMD5Base::EMPTY_BYTE_ARRAY;
@@ -191,6 +194,7 @@ $bytes* DigestMD5Base$DigestIntegrity::wrap($bytes* outgoing, int32_t start, int
 }
 
 $bytes* DigestMD5Base$DigestIntegrity::unwrap($bytes* incoming, int32_t start, int32_t len) {
+	$useLocalCurrentObjectStackCache();
 	if (len == 0) {
 		$init($DigestMD5Base);
 		return $DigestMD5Base::EMPTY_BYTE_ARRAY;
@@ -229,6 +233,7 @@ $bytes* DigestMD5Base$DigestIntegrity::unwrap($bytes* incoming, int32_t start, i
 }
 
 $bytes* DigestMD5Base$DigestIntegrity::getHMAC($bytes* Ki, $bytes* seqnum, $bytes* msg, int32_t start, int32_t len) {
+	$useLocalCurrentObjectStackCache();
 	$var($bytes, seqAndMsg, $new($bytes, 4 + len));
 	$System::arraycopy(seqnum, 0, seqAndMsg, 0, 4);
 	$System::arraycopy(msg, start, seqAndMsg, 4, len);

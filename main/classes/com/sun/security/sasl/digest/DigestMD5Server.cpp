@@ -242,6 +242,7 @@ $String* DigestMD5Server::REALM_PROPERTY = nullptr;
 $StringArray* DigestMD5Server::DIRECTIVE_KEY = nullptr;
 
 void DigestMD5Server::init$($String* protocol, $String* serverName, $Map* props, $CallbackHandler* cbh) {
+	$useLocalCurrentObjectStackCache();
 	$DigestMD5Base::init$(props, DigestMD5Server::MY_CLASS_NAME, 1, $$str({protocol, "/"_s, (serverName == nullptr ? "*"_s : serverName)}), cbh);
 	$set(this, serverRealms, $new($ArrayList));
 	this->useUTF8 = true;
@@ -280,6 +281,7 @@ void DigestMD5Server::init$($String* protocol, $String* serverName, $Map* props,
 }
 
 $bytes* DigestMD5Server::evaluateResponse($bytes* response) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(response)->length > $DigestMD5Base::MAX_RESPONSE_LENGTH) {
 		$throwNew($SaslException, $$str({"DIGEST-MD5: Invalid digest response length. Got:  "_s, $$str(response->length), " Expected < "_s, $$str($DigestMD5Base::MAX_RESPONSE_LENGTH)}));
 	}
@@ -351,6 +353,7 @@ $bytes* DigestMD5Server::evaluateResponse($bytes* response) {
 }
 
 $bytes* DigestMD5Server::generateChallenge($List* realms, $String* qopStr, $String* cipherStr) {
+	$useLocalCurrentObjectStackCache();
 	$var($ByteArrayOutputStream, out, $new($ByteArrayOutputStream));
 	for (int32_t i = 0; realms != nullptr && i < realms->size(); ++i) {
 		out->write($("realm=\""_s->getBytes(this->encoding)));
@@ -386,6 +389,7 @@ $bytes* DigestMD5Server::generateChallenge($List* realms, $String* qopStr, $Stri
 }
 
 $bytes* DigestMD5Server::validateClientResponse($byteArray2* responseVal) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(responseVal)->get(DigestMD5Server::CHARSET) != nullptr) {
 		if (!this->useUTF8 || !"utf-8"_s->equals($$new($String, responseVal->get(DigestMD5Server::CHARSET), this->encoding))) {
 			$throwNew($SaslException, $$str({"DIGEST-MD5: digest response format violation. Incompatible charset value: "_s, $$new($String, responseVal->get(DigestMD5Server::CHARSET))}));
@@ -607,6 +611,7 @@ $bytes* DigestMD5Server::validateClientResponse($byteArray2* responseVal) {
 
 bool DigestMD5Server::uriMatches($String* thisUri, $String* incomingUri) {
 	$init(DigestMD5Server);
+	$useLocalCurrentObjectStackCache();
 	if ($nc(thisUri)->equalsIgnoreCase(incomingUri)) {
 		return true;
 	}
@@ -620,6 +625,7 @@ bool DigestMD5Server::uriMatches($String* thisUri, $String* incomingUri) {
 }
 
 $bytes* DigestMD5Server::generateResponseAuth($String* username, $chars* passwd, $bytes* cnonce, int32_t nonceCount, $bytes* authzidBytes) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($bytes, responseValue, generateResponseValue(""_s, this->digestUri, this->negotiatedQop, username, this->negotiatedRealm, passwd, this->nonce, cnonce, nonceCount, authzidBytes));
 		$var($bytes, challenge, $new($bytes, $nc(responseValue)->length + 8));

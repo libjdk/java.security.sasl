@@ -613,6 +613,7 @@ $Object* DigestMD5Base::getNegotiatedProperty($String* propName) {
 
 $bytes* DigestMD5Base::generateNonce() {
 	$init(DigestMD5Base);
+	$useLocalCurrentObjectStackCache();
 	$var($Random, random, $new($Random));
 	$var($bytes, randomData, $new($bytes, DigestMD5Base::RAW_NONCE_SIZE));
 	random->nextBytes(randomData);
@@ -683,6 +684,7 @@ $String* DigestMD5Base::quotedStringValue($String* str) {
 }
 
 $bytes* DigestMD5Base::binaryToHex($bytes* digest) {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuilder, digestString, $new($StringBuilder));
 	for (int32_t i = 0; i < $nc(digest)->length; ++i) {
 		if (((int32_t)(digest->get(i) & (uint32_t)255)) < 16) {
@@ -732,6 +734,7 @@ $bytes* DigestMD5Base::getPlatformCiphers() {
 }
 
 $bytes* DigestMD5Base::generateResponseValue($String* authMethod, $String* digestUriValue, $String* qopValue, $String* usernameValue, $String* realmValue, $chars* passwdValue, $bytes* nonceValue, $bytes* cNonceValue, int32_t nonceCount, $bytes* authzidValue) {
+	$useLocalCurrentObjectStackCache();
 	$var($MessageDigest, md5, $MessageDigest::getInstance("MD5"_s));
 	$var($bytes, hexA1, nullptr);
 	$var($bytes, hexA2, nullptr);
@@ -816,6 +819,7 @@ $bytes* DigestMD5Base::generateResponseValue($String* authMethod, $String* diges
 
 $String* DigestMD5Base::nonceCountToHex(int32_t count) {
 	$init(DigestMD5Base);
+	$useLocalCurrentObjectStackCache();
 	$var($String, str, $Integer::toHexString(count));
 	$var($StringBuilder, pad, $new($StringBuilder));
 	if ($nc(str)->length() < 8) {
@@ -828,6 +832,7 @@ $String* DigestMD5Base::nonceCountToHex(int32_t count) {
 
 $byteArray2* DigestMD5Base::parseDirectives($bytes* buf, $StringArray* keyTable, $List* realmChoices, int32_t realmIndex) {
 	$init(DigestMD5Base);
+	$useLocalCurrentObjectStackCache();
 	$var($byteArray2, valueTable, $new($byteArray2, $nc(keyTable)->length));
 	$var($ByteArrayOutputStream, key, $new($ByteArrayOutputStream, 10));
 	$var($ByteArrayOutputStream, value, $new($ByteArrayOutputStream, 10));
@@ -945,6 +950,7 @@ int32_t DigestMD5Base::skipLws($bytes* buf, int32_t start) {
 
 void DigestMD5Base::extractDirective($String* key, $bytes* value, $StringArray* keyTable, $byteArray2* valueTable, $List* realmChoices, int32_t realmIndex) {
 	$init(DigestMD5Base);
+	$useLocalCurrentObjectStackCache();
 	for (int32_t i = 0; i < $nc(keyTable)->length; ++i) {
 		if ($nc(key)->equalsIgnoreCase(keyTable->get(i))) {
 			if ($nc(valueTable)->get(i) == nullptr) {
@@ -981,6 +987,7 @@ void DigestMD5Base::setParityBit($bytes* key) {
 
 $bytes* DigestMD5Base::addDesParity($bytes* input, int32_t offset, int32_t len) {
 	$init(DigestMD5Base);
+	$useLocalCurrentObjectStackCache();
 	if (len != 7) {
 		$throwNew($IllegalArgumentException, $$str({"Invalid length of DES Key Value:"_s, $$str(len)}));
 	}
@@ -999,6 +1006,7 @@ $bytes* DigestMD5Base::addDesParity($bytes* input, int32_t offset, int32_t len) 
 
 $SecretKey* DigestMD5Base::makeDesKeys($bytes* input, $String* desStrength) {
 	$init(DigestMD5Base);
+	$useLocalCurrentObjectStackCache();
 	$var($bytes, subkey1, addDesParity(input, 0, 7));
 	$var($KeySpec, spec, nullptr);
 	$var($SecretKeyFactory, desFactory, $SecretKeyFactory::getInstance(desStrength));

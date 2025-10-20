@@ -121,6 +121,7 @@ void Provider::access$000(Provider* x0, $Provider$Service* x1) {
 }
 
 void Provider::init$() {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$init($SecurityConstants);
 	$Provider::init$("SunSASL"_s, $SecurityConstants::PROVIDER_VER, Provider::info);

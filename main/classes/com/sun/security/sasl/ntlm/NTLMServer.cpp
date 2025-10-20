@@ -109,6 +109,7 @@ $String* NTLMServer::NTLM_HOSTNAME = nullptr;
 $String* NTLMServer::NTLM_RANDOM = nullptr;
 
 void NTLMServer::init$($String* mech, $String* protocol, $String* serverName, $Map* props, $CallbackHandler* cbh) {
+	$useLocalCurrentObjectStackCache();
 	this->step = 0;
 	$set(this, mech, mech);
 	$var($String, version, nullptr);
@@ -143,6 +144,7 @@ $String* NTLMServer::getMechanismName() {
 }
 
 $bytes* NTLMServer::evaluateResponse($bytes* response) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		++this->step;
 		if (this->step == 1) {

@@ -97,6 +97,7 @@ void PlainClient::dispose() {
 }
 
 $bytes* PlainClient::evaluateChallenge($bytes* challengeData) {
+	$useLocalCurrentObjectStackCache();
 	if (this->completed) {
 		$throwNew($IllegalStateException, "PLAIN authentication already completed"_s);
 	}

@@ -151,6 +151,7 @@ $StringArray* AbstractSaslImpl::STRENGTH_TOKENS = nullptr;
 $bytes* AbstractSaslImpl::STRENGTH_MASKS = nullptr;
 
 void AbstractSaslImpl::init$($Map* props, $String* className) {
+	$useLocalCurrentObjectStackCache();
 	this->completed = false;
 	this->privacy = false;
 	this->integrity = false;
@@ -328,6 +329,7 @@ $bytes* AbstractSaslImpl::parseStrength($String* strength) {
 
 $bytes* AbstractSaslImpl::parseProp($String* propName, $String* propVal, $StringArray* vals, $bytes* masks, $StringArray* tokens, bool ignore) {
 	$init(AbstractSaslImpl);
+	$useLocalCurrentObjectStackCache();
 	$var($StringTokenizer, parser, $new($StringTokenizer, propVal, ", \t\n"_s));
 	$var($String, token, nullptr);
 	$var($bytes, answer, $new($bytes, $nc(vals)->length));
@@ -362,6 +364,7 @@ void AbstractSaslImpl::traceOutput($String* srcClass, $String* srcMethod, $Strin
 
 void AbstractSaslImpl::traceOutput($String* srcClass, $String* srcMethod, $String* traceTag, $bytes* output, int32_t offset, int32_t len) {
 	$init(AbstractSaslImpl);
+	$useLocalCurrentObjectStackCache();
 	try {
 		int32_t origlen = len;
 		$var($Level, lev, nullptr);

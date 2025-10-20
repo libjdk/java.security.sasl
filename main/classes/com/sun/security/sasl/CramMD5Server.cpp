@@ -161,6 +161,7 @@ void CramMD5Server::init$($String* protocol, $String* serverFqdn, $Map* props, $
 }
 
 $bytes* CramMD5Server::evaluateResponse($bytes* responseData) {
+	$useLocalCurrentObjectStackCache();
 	if (this->completed) {
 		$throwNew($IllegalStateException, "CRAM-MD5 authentication already completed"_s);
 	}

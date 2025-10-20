@@ -137,6 +137,7 @@ $String* DigestMD5Base$DigestPrivacy::CLIENT_CONF_MAGIC = nullptr;
 $String* DigestMD5Base$DigestPrivacy::SVR_CONF_MAGIC = nullptr;
 
 void DigestMD5Base$DigestPrivacy::init$($DigestMD5Base* this$0, bool clientMode) {
+	$useLocalCurrentObjectStackCache();
 	$set(this, this$0, this$0);
 	$DigestMD5Base$DigestIntegrity::init$(this$0, clientMode);
 	try {
@@ -154,6 +155,7 @@ void DigestMD5Base$DigestPrivacy::init$($DigestMD5Base* this$0, bool clientMode)
 }
 
 void DigestMD5Base$DigestPrivacy::generatePrivacyKeyPair(bool clientMode) {
+	$useLocalCurrentObjectStackCache();
 	$var($bytes, ccmagic, $nc(DigestMD5Base$DigestPrivacy::CLIENT_CONF_MAGIC)->getBytes(this->this$0->encoding));
 	$var($bytes, scmagic, $nc(DigestMD5Base$DigestPrivacy::SVR_CONF_MAGIC)->getBytes(this->this$0->encoding));
 	$var($MessageDigest, md5, $MessageDigest::getInstance("MD5"_s));
@@ -244,6 +246,7 @@ void DigestMD5Base$DigestPrivacy::generatePrivacyKeyPair(bool clientMode) {
 }
 
 $bytes* DigestMD5Base$DigestPrivacy::wrap($bytes* outgoing, int32_t start, int32_t len) {
+	$useLocalCurrentObjectStackCache();
 	if (len == 0) {
 		$init($DigestMD5Base);
 		return $DigestMD5Base::EMPTY_BYTE_ARRAY;
@@ -299,6 +302,7 @@ $bytes* DigestMD5Base$DigestPrivacy::wrap($bytes* outgoing, int32_t start, int32
 }
 
 $bytes* DigestMD5Base$DigestPrivacy::unwrap($bytes* incoming, int32_t start, int32_t len) {
+	$useLocalCurrentObjectStackCache();
 	if (len == 0) {
 		$init($DigestMD5Base);
 		return $DigestMD5Base::EMPTY_BYTE_ARRAY;

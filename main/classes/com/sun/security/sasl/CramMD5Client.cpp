@@ -138,6 +138,7 @@ bool CramMD5Client::hasInitialResponse() {
 }
 
 $bytes* CramMD5Client::evaluateChallenge($bytes* challengeData) {
+	$useLocalCurrentObjectStackCache();
 	if (this->completed) {
 		$throwNew($IllegalStateException, "CRAM-MD5 authentication already completed"_s);
 	}

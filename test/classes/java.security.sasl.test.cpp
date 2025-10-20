@@ -17,7 +17,7 @@ void java$security$sasl$test$LibEventAction(int32_t eventType, void* eventData) 
 		java$security$sasl$test$PreloadClass(eventData);
 	}
 	if (eventType == JCPP_LIB_EVENT_TYPE_THREAD_START) {
-		$setCurrentObjectStack();
+		$onLibThreadStart(eventData);
 	}
 }
 
